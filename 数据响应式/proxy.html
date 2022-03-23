@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy</title>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        var box = document.querySelector('.box')
+        var data = {
+            name: 'nate',
+            age: 20
+        }
+        // box.innerHTML = data.age;
+
+        // data.age = 21;
+        // console.log(data);
+
+        let p = new Proxy(data, {
+            set(target, prop, newvalue) {
+                console.log('set...', target, prop, newvalue);
+                return Reflect.set(...arguments);
+            },
+            get(target, prop) {
+                console.log('get...', target, prop);
+                return Reflect.get(...arguments);
+            }
+        })
+        p.age = 21
+
+        console.log(p.name);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数内部this的调用</title>
+</head>
+<body>
+    <script>
+        /* function move() {
+            console.log(this)
+        }
+        move(); // 非严格模式window，严格模式undefined
+        window.move(); // window */
+
+        var obj = {
+            a: 10,
+            b: function(){
+                console.log(this)
+            },
+            c: {
+                name: 'c',
+                fn: function(){
+                    console.log(this)
+                }
+            }
+        }
+        obj.b(); // obj
+        window.obj.b() // obj
+        window.obj.c.fn() // c
+
+        var rFn = obj.c.fn;
+        rFn() // window
+
+    </script>
+</body>
+</html>

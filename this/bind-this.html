@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>修改this指向</title>
+    <style>
+        .lili,
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #0a8cd2;
+            position: relative;
+            left: 0;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="lili"></div>
+
+    <script>
+        //事件调用环境： 谁触发事件，函数里面的this指向就是谁
+        let box = document.querySelector('.box');
+        let lili = document.querySelector('.lili');
+
+        // var obj = {
+        //     a: 'a',
+        //     fn: () => {
+        //         console.log(this)
+        //     }
+        // }
+        // obj.fn.call(box) // window 箭头函数无法修改this指向
+
+        var obj = {
+            a: 'a',
+            fn: function () {
+                console.log(this)
+            }
+        }
+        obj.fn.call(box) // box
+        obj.fn.apply(box) // box
+        obj.fn.bind(box)() // box
+
+
+    </script>
+</body>
+
+</html>

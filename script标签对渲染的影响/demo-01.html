@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>script标签会阻塞DOM解析和渲染</title>
+</head>
+
+<body>
+    <!-- 不管inline或引入的script获取此标签之后的元素是获取不到的 -->
+    <script>
+        let div = document.querySelector('div');
+        console.log(div); // null
+    </script>
+    <div>
+        i am content.
+    </div>
+
+</body>
+
+</html>

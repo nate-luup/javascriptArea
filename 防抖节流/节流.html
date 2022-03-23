@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+    <style>
+        .box {
+            height: 200px;
+            background-color: #0A8CD2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        const box = document.querySelector('.box');
+        const testjl = jl2(move, 1000)
+        box.onmousemove = testjl;
+        function move(event) {
+            this.innerHTML = event.clientX
+        }
+        // 一秒钟执行一次事件监听函数
+
+        // 实现一： 使用setTimeout
+        function jl(fn, wait) {
+            let timmer = null;
+
+            return function () {
+                var args = arguments
+                console.log(timmer);
+                if (!timmer) {
+                    timmer = setTimeout(() => {
+                        clearTimeout(timmer)
+                        timmer = null
+                        fn.apply(this, args)
+                    }, wait)
+                }
+            }
+        }
+        // 实现二：
+        function jl2(fn, wait) {
+            let last = 0;
+            return function () {
+                var args = arguments
+                const now = Date.now();
+                if (now - last > wait) {
+                    last = now;
+                    fn.apply(this, args)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

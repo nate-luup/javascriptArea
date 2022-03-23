@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function fn() {
+            this.num = 10;
+            console.log(this)
+        }
+
+        // var c = new fn();
+        // new运算符做了几件事情
+        // 1. 调用函数
+        // 2. 自动创建一个对象 var obj = {};
+        // 3. 把创建出来的对象和this进行绑定
+        // 4. 如果构造函数没有返回值，隐式返回this对象
+
+
+        // 经典面试题来了：
+        fn.num = 20;
+        fn.prototype.num = 30;
+        fn.prototype.method = function () {
+            console.log(this.num)
+        }
+        var prototype = fn.prototype;
+        var method = prototype.method;
+        new fn().method();
+        prototype.method();
+        method();
+
+    </script>
+</body>
+
+</html>

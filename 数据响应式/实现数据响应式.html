@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现数据响应式</title>
+    <script src="./myvue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{name}}
+        <div>{{message}}</div>
+        <input v-model="test" />
+    </div>
+    <script>
+        let vm = new vue({
+            el: '#app',
+            data: {
+                name: 'lili',
+                message: '测试数据',
+                test: '双绑数据'
+            }
+        })
+        console.log(vm);
+    </script>
+</body>
+
+</html>

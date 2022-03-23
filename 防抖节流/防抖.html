@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖</title>
+    <style>
+        .box {
+            height: 200px;
+            background-color: #0A8CD2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        const box = document.querySelector('.box');
+        const testDebounce = debounce2(move, 1000)
+        box.onmousemove = testDebounce;
+        function move(event) {
+            this.innerHTML = event.clientX
+        }
+        // 场景一：清除当前定时器任务，在一秒后执行任务
+        function debounce(fn, wait) {
+            let timmer = null;
+            return function () {
+                const args = arguments;
+                //此时this是box
+                console.log(this);
+                timmer && clearTimeout(timmer);
+                // 通过箭头函数锁定作用域box
+                timmer = setTimeout(() => {
+                    // 绑定fn的this
+                    fn.apply(this, args)
+                }, wait)
+            }
+        }
+        // 场景二：先执行一次，一秒后在允许执行下一次操作
+        function debounce2(fn, wait) {
+            let timmer = null;
+            return function () {
+                const args = arguments;
+                let now = !timmer
+                //此时this是box
+                console.log(this);
+                timmer && clearTimeout(timmer);
+                timmer = setTimeout(() => {
+                    timmer = null;
+                }, wait)
+                if (now) {
+                    fn.apply(this, args)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

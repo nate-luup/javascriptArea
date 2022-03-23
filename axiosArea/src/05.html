@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>axios的实例</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <script>
+        // 创建axios实例
+        let axiosInstance = axios.create({
+            baseURL: 'http://localhost:3000/',
+            timeout: 5000
+        })
+
+        axiosInstance
+            .get("getAllStudent")
+            .then(
+                res => {
+                    console.log(res)
+                }
+            )
+            .catch((err) => {
+                console.log(err);
+            });
+
+        // 创建axios实例2
+        let axiosInstance2 = axios.create({
+            baseURL: 'http://localhost:3000/', // 可以换成其他server的url
+            timeout: 5 //       请求将会超时
+        })
+        axiosInstance2
+            .get("getAllStudent")
+            .then(
+                res => {
+                    console.log(res)
+                }
+            )
+            .catch((err) => {
+                console.log(err);
+            });
+    </script>
+</body>
+
+</html>

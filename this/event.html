@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this 指向问题</title>
+    <style>
+        .lili,
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #0a8cd2;
+            position: relative;
+            left: 0;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <div class="lili"></div>
+
+    <script>
+        //事件调用环境： 谁触发事件，函数里面的this指向就是谁
+        let box = document.querySelector('.box');
+        let lili = document.querySelector('.lili');
+
+        box.onclick = move;
+        lili.onclick = move;
+        function move() {
+            this.style.left = '100px'
+        }
+        console.log(this)
+    </script>
+</body>
+
+</html>
